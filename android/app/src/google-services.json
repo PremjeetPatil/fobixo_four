@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "239337812421",
+    "project_id": "notifications-88e8c",
+    "storage_bucket": "notifications-88e8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239337812421:android:9dc10689ea36f8e0d31bac",
+        "android_client_info": {
+          "package_name": "com.fobixo.notifications"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtZk-ThjMdASAFYYvWf3C0csDj7mNrj7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
