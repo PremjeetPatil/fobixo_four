@@ -38,10 +38,11 @@ dependencies:
   firebase_core: ^2.7.0
   firebase_messaging: ^14.4.0
   app_settings: ^4.2.0
-  path_provider:
+  path_provider: ^2.1.2
   http:
   flutter_local_notifications: ^13.0.0
   font_awesome_flutter: ^10.7.0
+  sqflite: ^2.3.2
 
 dev_dependencies:
   flutter_test:
