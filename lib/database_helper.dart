@@ -134,58 +134,185 @@
 // }
 
 
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+// import 'package:sqflite/sqflite.dart';
+// import 'package:path/path.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+// class DatabaseHelper {
+//   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  static Database? _database;
+//   static Database? _database;
 
-  DatabaseHelper._privateConstructor();
+//   DatabaseHelper._privateConstructor();
 
-  Future<Database> get database async {
-    if (_database != null) return _database!;
-    _database = await _initDatabase();
-    return _database!;
-  }
+//   Future<Database> get database async {
+//     if (_database != null) return _database!;
+//     _database = await _initDatabase();
+//     return _database!;
+//   }
 
-  Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'your_database.db');
-    return await openDatabase(path, version: 1, onCreate: _createDatabase);
-  }
+//   Future<Database> _initDatabase() async {
+//     String path = join(await getDatabasesPath(), 'your_database.db');
+//     return await openDatabase(path, version: 1, onCreate: _createDatabase);
+//   }
 
-  Future<void> _createDatabase(Database db, int version) async {
-    await db.execute('''
-      CREATE TABLE users (
-        id INTEGER PRIMARY KEY,
-        fullName TEXT,
-        dateOfBirth TEXT,
-        education TEXT,
-        address TEXT,
-        city TEXT,
-        selectedCityForCoaching TEXT,
-        whatsappMobileNumber TEXT,
-        email TEXT,
-        password TEXT,
-        schoolOrCollegeName TEXT,
-        interestedIn TEXT
-      )
-    ''');
-  }
+//   Future<void> _createDatabase(Database db, int version) async {
+//     await db.execute('''
+//       CREATE TABLE users (
+//         id INTEGER PRIMARY KEY,
+//         fullName TEXT,
+//         dateOfBirth TEXT,
+//         education TEXT,
+//         address TEXT,
+//         city TEXT,
+//         selectedCityForCoaching TEXT,
+//         whatsappMobileNumber TEXT,
+//         email TEXT,
+//         password TEXT,
+//         schoolOrCollegeName TEXT,
+//         interestedIn TEXT
+//       )
+//     ''');
+//   }
 
-  Future<int> insertUser(Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert('users', row);
-  }
+//   Future<int> insertUser(Map<String, dynamic> row) async {
+//     Database db = await instance.database;
+//     return await db.insert('users', row);
+//   }
 
-  Future<bool> checkUser(String email, String password) async {
-    Database db = await instance.database;
-    List<Map<String, dynamic>> results = await db.query(
-      'users',
-      where: 'email = ? AND password = ?',
-      whereArgs: [email, password],
-    );
-    return results.isNotEmpty;
-  }
-}
+//   Future<bool> checkUser(String email, String password) async {
+//     Database db = await instance.database;
+//     List<Map<String, dynamic>> results = await db.query(
+//       'users',
+//       where: 'email = ? AND password = ?',
+//       whereArgs: [email, password],
+//     );
+//     return results.isNotEmpty;
+//   }
+// }
+
+// import 'package:sqflite/sqflite.dart';
+// import 'package:path/path.dart';
+
+// class DatabaseHelper {
+//   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+
+//   static Database? _database;
+
+//   DatabaseHelper._privateConstructor();
+
+//   Future<Database> get database async {
+//     if (_database != null) return _database!;
+//     _database = await _initDatabase();
+//     return _database!;
+//   }
+
+//   Future<Database> _initDatabase() async {
+//     String path = join(await getDatabasesPath(), 'your_database.db');
+//     return await openDatabase(path, version: 1, onCreate: _createDatabase);
+//   }
+
+//   Future<void> _createDatabase(Database db, int version) async {
+//     await db.execute('''
+//       CREATE TABLE users (
+//         id INTEGER PRIMARY KEY,
+//         fullName TEXT,
+//         dateOfBirth TEXT,
+//         education TEXT,
+//         address TEXT,
+//         city TEXT,
+//         selectedCityForCoaching TEXT,
+//         whatsappMobileNumber TEXT,
+//         interestedIn TEXT
+//       )
+//     ''');
+//   }
+
+//   Future<int> insertUser(Map<String, dynamic> row) async {
+//     Database db = await instance.database;
+//     return await db.insert('users', row);
+//   }
+
+//   Future<bool> checkUser(String email, String password) async {
+//     Database db = await instance.database;
+//     List<Map<String, dynamic>> results = await db.query(
+//       'users',
+//       where: 'email = ? AND password = ?',
+//       whereArgs: [email, password],
+//     );
+//     return results.isNotEmpty;
+//   }
+// }
+
+// import 'package:sqflite/sqflite.dart';
+// import 'package:path/path.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+
+// class DatabaseHelper {
+//   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+
+//   static Database? _database;
+
+//   DatabaseHelper._privateConstructor();
+
+//   Future<Database> get database async {
+//     if (_database != null) return _database!;
+//     _database = await _initDatabase();
+//     return _database!;
+//   }
+
+//   Future<Database> _initDatabase() async {
+//     String path = join(await getDatabasesPath(), 'your_database.db');
+//     return await openDatabase(path, version: 1, onCreate: _createDatabase);
+//   }
+
+//   Future<void> _createDatabase(Database db, int version) async {
+//     await db.execute('''
+//       CREATE TABLE users (
+//         id INTEGER PRIMARY KEY,
+//         fullName TEXT,
+//         dateOfBirth TEXT,
+//         education TEXT,
+//         address TEXT,
+//         city TEXT,
+//         selectedCityForCoaching TEXT,
+//         whatsappMobileNumber TEXT,
+//         interestedIn TEXT
+//       )
+//     ''');
+//   }
+
+//   Future<int> insertUser(Map<String, dynamic> row) async {
+//     // Insert user into local database
+//     Database db = await instance.database;
+//     int userId = await db.insert('users', row);
+
+//     // Send user data to server
+//     try {
+//       var response = await http.post(
+//         Uri.parse('https://your-server-url.com/signup'),
+//         body: jsonEncode(row),
+//         headers: {'Content-Type': 'application/json'},
+//       );
+//       if (response.statusCode == 200) {
+//         print('User data sent to server successfully');
+//       } else {
+//         print('Failed to send user data to server');
+//       }
+//     } catch (e) {
+//       print('Error sending user data to server: $e');
+//     }
+
+//     return userId;
+//   }
+
+//   Future<bool> checkUser(String email, String password) async {
+//     Database db = await instance.database;
+//     List<Map<String, dynamic>> results = await db.query(
+//       'users',
+//       where: 'email = ? AND password = ?',
+//       whereArgs: [email, password],
+//     );
+//     return results.isNotEmpty;
+//   }
+// }
